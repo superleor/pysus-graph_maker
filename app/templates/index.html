@@ -6,11 +6,19 @@
 </head>
 
 <body>
-	<h2>Média de peso por mês</h2>
-	{{ chart1|safe }}
+	<h2>Select Chart Type:</h2>
+	<form action="/" method="GET">
+		<select name="chart_type">
+			<option value="chart1">Média de peso por mês</option>
+			<option value="chart2">Taxa de Sífilis Congênita e Gestacional por Ano</option>
+		</select>
+		<input type="submit" value="Generate Chart">
+	</form>
 
-	<h2>Taxa de Sífilis Congênita e Gestacional por Ano</h2>
-	{{ chart2|safe }}
+	{% if chart %}
+		<h2>Chart:</h2>
+		{{ chart|safe }}
+	{% endif %}
 </body>
 
 </html>

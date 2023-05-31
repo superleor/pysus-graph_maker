@@ -4,43 +4,6 @@ import sys
 import plotly.graph_objs as go
 import pandas as pd
 
-""" df = download('PI', 2012)
-df2 = download('PI', 2019)
-df3 = download('SC', 2019) """
-
-""" def calculo_media_peso(df, by_month = True):
-    pesos = pd.to_numeric(df['PESO'], errors='coerce')
-    dtnascs = df['DTNASC']
-
-    if by_month:
-        pesos_por_mes = defaultdict(lambda: {"total": 0.0, "count": 0})
-    else:
-        pesos_por_mes = defaultdict(lambda: {"total": 0.0, "count": 0, "year": None})
-
-
-    for peso, dtnasc in zip(pesos, dtnascs):
-        if not pd.isna(peso):
-            if by_month:
-                periodo = dtnasc[2:4]
-            else:
-                periodo = dtnasc[4:]
-            pesos_por_mes[periodo]["total"] += peso
-            pesos_por_mes[periodo]["count"] += 1
-            if not by_month:
-                pesos_por_mes[periodo]["year"] = dtnasc[4:]
-
-    media_pesos_por_mes = {}
-    for periodo, data in pesos_por_mes.items():
-        if by_month:
-            media_pesos_por_mes[periodo] = data["total"] / data["count"]
-        else:
-            media_pesos_por_mes[data["year"]] = data["total"] / data["count"]
-
-    return media_pesos_por_mes """
-
-# interessante mencionar a mudança para pandas no texto e do docker (timeline)
-# generalizar baseado em input do usuário (não necessariamente em código)
-
 def download_sisinfo(sisinfo, uf_or_disease, ano_ini, ano_fim=None):
     if sisinfo == 'SINASC':
         download_func = sinasc.download
@@ -141,25 +104,3 @@ def create_line_chart(df):
     )
     
     return fig.to_html(full_html=False)
-
-""" 
-#peso medio por mes entre 2012 e 2019 no PI
-media_pesos_por_mes1 = calculo_media_peso(df) #PI, 2012
-media_pesos_por_mes2 = calculo_media_peso(df2) #PI, 2019
-
-#PESO MEDIO DE 2019 ENTRE pi e sc
-media_pesos_pandas1 = calculo_media_peso2(df) #PI, 2019
-media_pesos_pandas2 = calculo_media_peso2(df2) #SC, 2019
- """
-""" print("Media de pesos por mês:")
-for periodo in sorted(media_pesos_por_mes1.keys()):
-    print(f"{periodo}: {(media_pesos_por_mes1[periodo] - media_pesos_por_mes2[periodo]):.2f} gramas") """ #positivo: 2012 >, negativo: 2019 >
-
-""" print("Media de pesos por ano:")
-for periodo in sorted(media_pesos_por_mes1.keys()):
-    print(f"{periodo}: {(media_pesos_por_mes1[periodo] - media_pesos_por_mes2[periodo]):.2f} gramas") """ #positivo: PI >, negativo: SC >
-""" 
-for mes, media in media_pesos_pandas1.items():
-    print(f'Mês {mes}: {media:.2f}') """
-#df2 = pd.DataFrame({"peso":peso, "dtNasc":dtNasc})
-#df2.to_csv("teste1.csv",index=False)

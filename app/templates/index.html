@@ -1,24 +1,55 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	
 </head>
-
 <body>
-	<h2>Select Chart Type:</h2>
-	<form action="/" method="GET">
-		<select name="chart_type">
-			<option value="chart1">Média de peso por mês</option>
-			<option value="chart2">Taxa de Sífilis Congênita e Gestacional por Ano</option>
-		</select>
-		<input type="submit" value="Generate Chart">
-	</form>
-
-	{% if chart %}
-		<h2>Chart:</h2>
-		{{ chart|safe }}
-	{% endif %}
+    <h2>Choose Chart Type</h2>
+    <form action="/" method="post">
+        <label for="chart_type">Select Chart Type:</label>
+        <select name="chart_type" id="chart_type">
+            <option value="chart1">Chart 1</option>
+            <option value="chart2">Chart 2</option>
+        </select>
+        <br><br>
+        <div id="chart1_options" style="display:none;">
+            <label for="uf">UF:</label>
+            <select name="uf" id="uf" required>
+                <option value="">Select UF</option>
+                <option value="AC">PI</option>
+                <!-- Adicionar as outras depois -->
+            </select>
+            <br><br>
+            <label for="ano_ini">Ano Inicial:</label>
+            <select name="ano_ini" id="ano_ini" required>
+                <option value="">Select Ano Inicial</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+            </select>
+            <br><br>
+            <label for="ano_fim">Ano Final:</label>
+            <select name="ano_fim" id="ano_fim">
+                <option value="">Select Ano Final (opcional)</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+            </select>
+            <br><br>
+        </div>
+        <input type="submit" value="Generate Chart">
+    </form>
+    
+    <script>
+        const chartTypeSelect = document.getElementById('chart_type');
+        const chart1Options = document.getElementById('chart1_options');
+        
+        chartTypeSelect.addEventListener('change', function() {
+            if (this.value === 'chart1') {
+                chart1Options.style.display = 'block';
+            } else {
+                chart1Options.style.display = 'none';
+            }
+        });
+    </script>
 </body>
-
 </html>

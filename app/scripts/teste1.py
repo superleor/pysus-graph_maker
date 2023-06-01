@@ -37,9 +37,10 @@ def download_sisinfo(sisinfo, uf_or_disease, ano_ini, ano_fim=None):
 def calculo_media_peso2(df):
     df['PESO'] = pd.to_numeric(df['PESO'], errors='coerce')
     df['DTNASC'] = pd.to_datetime(df['DTNASC'], format='%d%m%Y')
-    df['MES'] = df['DTNASC'].dt.month
-    media_por_mes = df.groupby('MES')['PESO'].mean()
-    return media_por_mes.to_dict()
+    df['YEAR'] = df['DTNASC'].dt.year
+    df['MONTH'] = df['DTNASC'].dt.month
+    media_por_mes_ano = df.groupby(['YEAR', 'MONTH'])['PESO'].mean()
+    return media_por_mes_ano.to_dict()
 
 def calcular_taxa_sifilis_congenita2(df_sinasc, df_sinan1, df_sinan2):
     df_sifilis_cong_piaui = (df_sinan1.loc[df_sinan1['SG_UF'] == '22']).rename(columns={'NU_ANO': 'ANO'}) #22 é o código do Piauí
@@ -72,14 +73,26 @@ def calcular_taxa_sifilis_congenita2(df_sinasc, df_sinan1, df_sinan2):
     #print((df_sifilis_piaui/nascidos_vivos), file=sys.stderr)
 
 def create_bar_chart(data):
+    years = sorted(set(key[0] for key in data.keys()))
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    x_values = [months[i-1] for i in data.keys()]
-    y_values = list(data.values())
+    
+    x_values = []
+    y_values = []
+    separators = []
+
+    for year in years:
+        x_values.extend([months[key[1] - 1] + f" ({year})" for key in data.keys() if key[0] == year])
+        y_values.extend(list(data[key] for key in data.keys() if key[0] == year))
+        separators.append(len(x_values) - 0.5)
+    
+    shapes = []
+    for separator in separators:
+        shapes.append({'type': 'line', 'xref': 'x', 'yref': 'paper', 'x0': separator, 'x1': separator, 'y0': 0, 'y1': 1, 'line': {'color': 'black', 'width': 1}})
 
     trace = go.Bar(x=x_values, y=y_values)
     data = [trace]
 
-    layout = go.Layout(title='Average weight by month')
+    layout = go.Layout(title='Average weight by month', yaxis=dict(range=[min(y_values) - 1, max(y_values) + 1]), shapes=shapes)
     fig = go.Figure(data=data, layout=layout)
 
     return fig.to_html(full_html=False)

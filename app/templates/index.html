@@ -12,23 +12,23 @@
         </select>
         <br><br>
         <div id="chart1_options" style="display:none;">
-            <label for="uf">UF:</label>
-            <select name="uf" id="uf" required>
+            <label for="uf_chart1">UF:</label>
+            <select name="uf1" id="uf_chart1">
                 <option value="">Select UF</option>
-                <option value="AC">PI</option>
-                <!-- Adicionar as outras depois -->
+                <option value="PI">PI</option>
+                <!-- Add other UF options here -->
             </select>
             <br><br>
-            <label for="ano_ini">Ano Inicial:</label>
-            <select name="ano_ini" id="ano_ini" required>
+            <label for="ano_ini_chart1">Ano Inicial:</label>
+            <select name="ano_ini1" id="ano_ini_chart1">
                 <option value="">Select Ano Inicial</option>
                 <option value="2010">2010</option>
                 <option value="2011">2011</option>
                 <option value="2012">2012</option>
             </select>
             <br><br>
-            <label for="ano_fim">Ano Final:</label>
-            <select name="ano_fim" id="ano_fim">
+            <label for="ano_fim_chart1">Ano Final:</label>
+            <select name="ano_fim1" id="ano_fim_chart1">
                 <option value="">Select Ano Final (opcional)</option>
                 <option value="2010">2010</option>
                 <option value="2011">2011</option>
@@ -36,20 +36,97 @@
             </select>
             <br><br>
         </div>
-        <input type="submit" value="Generate Chart">
+        <div id="chart2_options" style="display:none;">
+            <label for="uf_chart2">UF:</label>
+            <select name="uf2" id="uf_chart2">
+                <option value="">Select UF</option>
+                <option value="AC">AC</option>
+                <!-- Add other UF options here -->
+            </select>
+            <br><br>
+            <label for="disease1">Doença 1:</label>
+            <select name="disease1" id="disease1">
+                <option value="">Select disease 1</option>
+                <option value="Sífilis Congênita">Sífilis Congênita</option>
+                <!-- Add other disease options here -->
+            </select>
+            <br><br>
+            <label for="disease2">Doença 2:</label>
+            <select name="disease2" id="disease2">
+                <option value="">Select disease 2</option>
+                <option value="Sífilis em Gestante">Sífilis em Gestante</option>
+                <!-- Add other disease options here -->
+            </select>
+            <br><br>
+            <label for="ano_ini_chart2">Ano Inicial:</label>
+            <select name="ano_ini2" id="ano_ini_chart2">
+                <option value="">Select Ano Inicial</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+            </select>
+            <br><br>
+            <label for="ano_fim_chart2">Ano Final:</label>
+            <select name="ano_fim2" id="ano_fim_chart2">
+                <option value="">Select Ano Final</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+            </select>
+            <br><br>
+        </div>
+        <input type="submit" value="Generate Chart" id="generate_chart_button">
     </form>
     
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
         const chartTypeSelect = document.getElementById('chart_type');
         const chart1Options = document.getElementById('chart1_options');
-        
+        const chart2Options = document.getElementById('chart2_options');
+        const generateChartButton = document.getElementById('generate_chart_button');
+    
         chartTypeSelect.addEventListener('change', function() {
             if (this.value === 'chart1') {
                 chart1Options.style.display = 'block';
+                chart2Options.style.display = 'none';
+            } else if (this.value === 'chart2') {
+                chart1Options.style.display = 'none';
+                chart2Options.style.display = 'block';
             } else {
                 chart1Options.style.display = 'none';
+                chart2Options.style.display = 'none';
             }
         });
-    </script>
+    
+        generateChartButton.addEventListener('click', function(event) {
+            const selectedChartType = chartTypeSelect.value;
+    
+            if (selectedChartType === 'chart1') {
+                const selectedUf = document.getElementById('uf_chart1').value;
+                const selectedAnoIni = document.getElementById('ano_ini_chart1').value;
+    
+                if (selectedUf === '' || selectedAnoIni === '') {
+                    event.preventDefault();
+                    alert('Please select UF and Ano Inicial.');
+                }
+            } else if (selectedChartType === 'chart2') {
+                const selectedUf = document.getElementById('uf_chart2').value;
+                const selectedDisease1 = document.getElementById('disease1').value;
+                const selectedDisease2 = document.getElementById('disease2').value;
+                const selectedAnoIni = document.getElementById('ano_ini_chart2').value;
+                const selectedAnoFim = document.getElementById('ano_fim_chart2').value;
+    
+                if (selectedUf === '' || selectedDisease1 === '' || selectedDisease2 === '' || selectedAnoIni === '') {
+                    event.preventDefault();
+                    alert('Please select UF, Disease 1, Disease 2, and Ano Inicial.');
+                }
+            }
+        });
+    })
+    </script>    
 </body>
 </html>

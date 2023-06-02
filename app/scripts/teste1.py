@@ -34,13 +34,20 @@ def download_sisinfo(sisinfo, uf_or_disease, ano_ini, ano_fim=None):
     else: 
         return pd.concat(df_list, ignore_index=True)
 
-def calculo_media_peso2(df):
-    df['PESO'] = pd.to_numeric(df['PESO'], errors='coerce')
+def calculo_media_peso2(df, index):
+    df[index] = pd.to_numeric(df[index], errors='coerce')
     df['DTNASC'] = pd.to_datetime(df['DTNASC'], format='%d%m%Y')
     df['YEAR'] = df['DTNASC'].dt.year
     df['MONTH'] = df['DTNASC'].dt.month
-    media_por_mes_ano = df.groupby(['YEAR', 'MONTH'])['PESO'].mean()
-    return media_por_mes_ano.to_dict()
+    
+    if index == 'GESTACAO' or index == 'CONSULTAS':
+        df = df[df[index] != 9]
+    
+    media_por_mes_ano = df.groupby(['YEAR', 'MONTH'])[index].mean().reset_index()
+    media_por_mes_ano[index] = media_por_mes_ano[index].apply(lambda x: round(x, 2))
+
+    return media_por_mes_ano.set_index(['YEAR', 'MONTH']).to_dict()[index]
+
 
 def calcular_taxa_sifilis_congenita2(df_sinasc, df_sinan1, df_sinan2):
     df_sifilis_cong_piaui = (df_sinan1.loc[df_sinan1['SG_UF'] == '22']).rename(columns={'NU_ANO': 'ANO'}) #22 é o código do Piauí

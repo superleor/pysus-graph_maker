@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 </head>
+
 <body>
     <h2>Choose Chart Type</h2>
     <form action="/" method="post">
@@ -15,24 +17,77 @@
             <label for="uf_chart1">UF:</label>
             <select name="uf1" id="uf_chart1">
                 <option value="">Select UF</option>
+                <option value="AC">AC</option>
+                <option value="AL">AL</option>
+                <option value="AP">AP</option>
+                <option value="AM">AM</option>
+                <option value="BA">BA</option>
+                <option value="CE">CE</option>
+                <option value="DF">DF</option>
+                <option value="ES">ES</option>
+                <option value="GO">GO</option>
+                <option value="MA">MA</option>
+                <option value="MT">MT</option>
+                <option value="MS">MS</option>
+                <option value="MG">MG</option>
+                <option value="PA">PA</option>
+                <option value="PB">PB</option>
+                <option value="PR">PR</option>
+                <option value="PE">PE</option>
                 <option value="PI">PI</option>
-                <!-- Add other UF options here -->
+                <option value="RJ">RJ</option>
+                <option value="RN">RN</option>
+                <option value="RS">RS</option>
+                <option value="RO">RO</option>
+                <option value="RR">RR</option>
+                <option value="SC">SC</option>
+                <option value="SP">SP</option>
+                <option value="SE">SE</option>
+                <option value="TO">TO</option>
+            </select>
+            <br><br>
+            <label for="index_chart1">Index:</label>
+            <select name="index1" id="index_chart1">
+                <option value="">Selecione a média a ser calculada</option>
+                <option value="PESO">Peso</option>
+                <option value="GESTACAO">Gestação</option>
+                <option value="IDADEMAE">Idade da Mãe</option>
+                <option value="CONSULTAS">Consultas Pré-Natal</option>
+                <option value="APGAR5">Apgar no quinto minuto</option>
             </select>
             <br><br>
             <label for="ano_ini_chart1">Ano Inicial:</label>
             <select name="ano_ini1" id="ano_ini_chart1">
                 <option value="">Select Ano Inicial</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
                 <option value="2010">2010</option>
                 <option value="2011">2011</option>
                 <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
             </select>
             <br><br>
             <label for="ano_fim_chart1">Ano Final:</label>
             <select name="ano_fim1" id="ano_fim_chart1">
                 <option value="">Select Ano Final (opcional)</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
                 <option value="2010">2010</option>
                 <option value="2011">2011</option>
                 <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
             </select>
             <br><br>
         </div>
@@ -81,52 +136,53 @@
         </div>
         <input type="submit" value="Generate Chart" id="generate_chart_button">
     </form>
-    
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-        const chartTypeSelect = document.getElementById('chart_type');
-        const chart1Options = document.getElementById('chart1_options');
-        const chart2Options = document.getElementById('chart2_options');
-        const generateChartButton = document.getElementById('generate_chart_button');
-    
-        chartTypeSelect.addEventListener('change', function() {
-            if (this.value === 'chart1') {
-                chart1Options.style.display = 'block';
-                chart2Options.style.display = 'none';
-            } else if (this.value === 'chart2') {
-                chart1Options.style.display = 'none';
-                chart2Options.style.display = 'block';
-            } else {
-                chart1Options.style.display = 'none';
-                chart2Options.style.display = 'none';
-            }
-        });
-    
-        generateChartButton.addEventListener('click', function(event) {
-            const selectedChartType = chartTypeSelect.value;
-    
-            if (selectedChartType === 'chart1') {
-                const selectedUf = document.getElementById('uf_chart1').value;
-                const selectedAnoIni = document.getElementById('ano_ini_chart1').value;
-    
-                if (selectedUf === '' || selectedAnoIni === '') {
-                    event.preventDefault();
-                    alert('Please select UF and Ano Inicial.');
+        document.addEventListener("DOMContentLoaded", function () {
+            const chartTypeSelect = document.getElementById('chart_type');
+            const chart1Options = document.getElementById('chart1_options');
+            const chart2Options = document.getElementById('chart2_options');
+            const generateChartButton = document.getElementById('generate_chart_button');
+
+            chartTypeSelect.addEventListener('change', function () {
+                if (this.value === 'chart1') {
+                    chart1Options.style.display = 'block';
+                    chart2Options.style.display = 'none';
+                } else if (this.value === 'chart2') {
+                    chart1Options.style.display = 'none';
+                    chart2Options.style.display = 'block';
+                } else {
+                    chart1Options.style.display = 'none';
+                    chart2Options.style.display = 'none';
                 }
-            } else if (selectedChartType === 'chart2') {
-                const selectedUf = document.getElementById('uf_chart2').value;
-                const selectedDisease1 = document.getElementById('disease1').value;
-                const selectedDisease2 = document.getElementById('disease2').value;
-                const selectedAnoIni = document.getElementById('ano_ini_chart2').value;
-                const selectedAnoFim = document.getElementById('ano_fim_chart2').value;
-    
-                if (selectedUf === '' || selectedDisease1 === '' || selectedDisease2 === '' || selectedAnoIni === '') {
-                    event.preventDefault();
-                    alert('Please select UF, Disease 1, Disease 2, and Ano Inicial.');
+            });
+
+            generateChartButton.addEventListener('click', function (event) {
+                const selectedChartType = chartTypeSelect.value;
+
+                if (selectedChartType === 'chart1') {
+                    const selectedUf = document.getElementById('uf_chart1').value;
+                    const selectedAnoIni = document.getElementById('ano_ini_chart1').value;
+
+                    if (selectedUf === '' || selectedAnoIni === '') {
+                        event.preventDefault();
+                        alert('Please select UF and Ano Inicial.');
+                    }
+                } else if (selectedChartType === 'chart2') {
+                    const selectedUf = document.getElementById('uf_chart2').value;
+                    const selectedDisease1 = document.getElementById('disease1').value;
+                    const selectedDisease2 = document.getElementById('disease2').value;
+                    const selectedAnoIni = document.getElementById('ano_ini_chart2').value;
+                    const selectedAnoFim = document.getElementById('ano_fim_chart2').value;
+
+                    if (selectedUf === '' || selectedDisease1 === '' || selectedDisease2 === '' || selectedAnoIni === '') {
+                        event.preventDefault();
+                        alert('Please select UF, Disease 1, Disease 2, and Ano Inicial.');
+                    }
                 }
-            }
-        });
-    })
-    </script>    
+            });
+        })
+    </script>
 </body>
+
 </html>

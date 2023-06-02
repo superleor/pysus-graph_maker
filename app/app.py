@@ -10,10 +10,11 @@ def index():
         chart_type = request.form['chart_type']
         if chart_type == 'chart1':
             uf = request.form['uf1']
+            index = request.form['index1']
             ano_ini = int(request.form['ano_ini1'])
             ano_fim = int(request.form['ano_fim1']) if 'ano_fim1' in request.form and request.form['ano_fim1'].strip() != '' else None
             df_sinasc = download_sisinfo('SINASC', uf, ano_ini, ano_fim)
-            media_pesos_por_mes = calculo_media_peso2(df_sinasc)
+            media_pesos_por_mes = calculo_media_peso2(df_sinasc, index)
             chart = create_bar_chart(media_pesos_por_mes)
             return render_template("chart1.html", chart=chart)
         elif chart_type == 'chart2':

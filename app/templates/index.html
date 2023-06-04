@@ -7,10 +7,10 @@
 <body>
     <h2>Choose Chart Type</h2>
     <form action="/" method="post">
-        <label for="chart_type">Select Chart Type:</label>
+        <label for="chart_type">Escolha o tipo de Chart:</label>
         <select name="chart_type" id="chart_type">
-            <option value="chart1">Chart 1</option>
-            <option value="chart2">Chart 2</option>
+            <option value="chart1">Média por mês baseado em nascidos vivos</option>
+            <option value="chart2">Taxa de doenças por ano</option>
         </select>
         <br><br>
         <div id="chart1_options" style="display:none;">
@@ -96,21 +96,46 @@
             <select name="uf2" id="uf_chart2">
                 <option value="">Select UF</option>
                 <option value="AC">AC</option>
-                <!-- Add other UF options here -->
+                <option value="AL">AL</option>
+                <option value="AP">AP</option>
+                <option value="AM">AM</option>
+                <option value="BA">BA</option>
+                <option value="CE">CE</option>
+                <option value="DF">DF</option>
+                <option value="ES">ES</option>
+                <option value="GO">GO</option>
+                <option value="MA">MA</option>
+                <option value="MT">MT</option>
+                <option value="MS">MS</option>
+                <option value="MG">MG</option>
+                <option value="PA">PA</option>
+                <option value="PB">PB</option>
+                <option value="PR">PR</option>
+                <option value="PE">PE</option>
+                <option value="PI">PI</option>
+                <option value="RJ">RJ</option>
+                <option value="RN">RN</option>
+                <option value="RS">RS</option>
+                <option value="RO">RO</option>
+                <option value="RR">RR</option>
+                <option value="SC">SC</option>
+                <option value="SP">SP</option>
+                <option value="SE">SE</option>
+                <option value="TO">TO</option>
             </select>
             <br><br>
             <label for="disease1">Doença 1:</label>
             <select name="disease1" id="disease1">
-                <option value="">Select disease 1</option>
+                <option value="">Selecione doença 1</option>
                 <option value="Sífilis Congênita">Sífilis Congênita</option>
-                <!-- Add other disease options here -->
+                <option value="Sífilis em Gestante">Sífilis em Gestante</option>
             </select>
             <br><br>
             <label for="disease2">Doença 2:</label>
             <select name="disease2" id="disease2">
-                <option value="">Select disease 2</option>
+                <option value="">Selecione doença 2</option>
+                <option value="Sífilis Congênita">Sífilis Congênita</option>
                 <option value="Sífilis em Gestante">Sífilis em Gestante</option>
-                <!-- Add other disease options here -->
             </select>
             <br><br>
             <label for="ano_ini_chart2">Ano Inicial:</label>
@@ -121,6 +146,13 @@
                 <option value="2010">2010</option>
                 <option value="2011">2011</option>
                 <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
             </select>
             <br><br>
             <label for="ano_fim_chart2">Ano Final:</label>
@@ -131,10 +163,17 @@
                 <option value="2010">2010</option>
                 <option value="2011">2011</option>
                 <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
             </select>
             <br><br>
         </div>
-        <input type="submit" value="Generate Chart" id="generate_chart_button">
+        <input type="submit" value="Gerar Chart" id="generate_chart_button">
     </form>
 
     <script>

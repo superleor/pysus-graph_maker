@@ -4,7 +4,7 @@
 Comandos para rodar:
 ```
 git clone https://github.com/superleor/pysus-graph_maker
-cd main
+cd pysus-graph_maker
 docker-compose up
 ```
 

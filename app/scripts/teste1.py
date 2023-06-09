@@ -80,7 +80,7 @@ def calcular_taxa(df_sinasc, df_sinan1, df_sinan2, uf):
 
 def create_bar_chart(data):
     years = sorted(set(key[0] for key in data.keys()))
-    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
     
     x_values = []
     y_values = []
